@@ -29,6 +29,7 @@
         firebase.initializeApp(firebaseConfig);
         var db = firebase.firestore();
         var emailtoverify = "";
+        var emailtoSendTo = "";
         window.onload = function() {
             db.collection("users").where("username", "==", assignedFrom).get()
                 .then(function(querySnapshot) {
@@ -47,6 +48,9 @@
                             if (querySnapshot2.size != 0) {
                                 document.getElementById("To").focus();
                                 document.getElementById("To").value = assignedTo;
+                                querySnapshot2.forEach(function(doc) {
+                                    emailtoSendTo = doc.data().email;
+                                });
                             } else {
                                 alert(assignedTo + "- user not found.");
                                 window.location.href = "http://tarea-api.herokuapp.com/";
@@ -61,8 +65,8 @@
             var instanceModal = M.Modal.init(Modalelem);
             instanceModal.open();
         }
-        
-        function verify(){
+
+        function verify() {
             var firsttime = true;
             var password = document.getElementById("password").value;
             firebase.auth().signInWithEmailAndPassword(emailtoverify, password).catch(function(error) {
@@ -82,6 +86,7 @@
                 var loggedin = firebase.auth().currentUser;
                 if (firsttime) {
                     firsttime = false;
+                    var taskId = "";
                     db.collection("tasks").add({
                             from: assignedFrom,
                             to: assignedTo,
@@ -92,12 +97,14 @@
                             priority: document.querySelector('input[name=Priority]:checked').value
                         })
                         .then(function(docRef) {
+                            taskId = docRef.id;
                             M.toast({
                                 html: "Task Added!",
                                 classes: 'rounded',
                                 displayLength: '1200'
                             });
                             firebase.auth().signOut();
+                            window.location.href = "http://tarea-api.herokuapp.com/email/" + emailtoSendTo + "/" + taskId;
                         })
                         .catch(function(error) {
                             console.log(error);
