@@ -36,7 +36,7 @@
                         document.getElementById("From").focus();
                         document.getElementById("From").value = assignedFrom;
                         querySnapshot.forEach(function(doc) {
-                            alert(doc);
+                            console.log(doc);
                         });
                     } else {
                         alert(assignedFrom + "- user not found.");
