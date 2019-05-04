@@ -55,16 +55,16 @@
 
     <div class="logintab  product">
 
-        <form method="POST" action="/addnewtask">
+        <form method="POST" action="http://tarea-api.herokuapp.com/addnewtask">
 
             <div class="input-field half-input" style="float:left;">
-                <input id="From" type="text" name="from" class="validate product">
+                <input id="From" type="text" name="from" class="validate product" required>
                 <label for="From">From</label>
             </div>
 
 
             <div class="input-field half-input" style="float:right;">
-                <input id="To" type="text" name="to" class="validate product">
+                <input id="To" type="text" name="to" class="validate product" required>
                 <label for="To">To</label>
             </div>
 
@@ -73,12 +73,12 @@
             <br>
 
             <div class="input-field">
-                <input id="Title" type="text" name="title" class="validate product">
+                <input id="Title" type="text" name="title" class="validate product" required>
                 <label for="Title">Title</label>
             </div>
 
             <div class="input-field">
-                <textarea id="description" class="materialize-textarea" maxlength="250"></textarea>
+                <textarea id="description" class="materialize-textarea" maxlength="250" required></textarea>
                 <label for="description" style="margin-left: 0px;padding-left: 0px;">Description</label>
             </div>
 
