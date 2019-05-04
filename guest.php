@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 
 <head>
-
     <link rel="icon" href="tarea-logo.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <title>Add task</title>
+    <title>Guest Session</title>
+
     <link rel="stylesheet" href="style.css" />
     <script>
         var assignedFrom = "<?php echo $_GET['assignee']?>";
-        var assignedTo = "<?php echo $_GET['assignedto']?>";
-        window.onload = function(){
+        var pin = "<?php echo $_GET['pin']?>";
+        window.onload = function() {
             document.getElementById("From").focus();
             document.getElementById("From").value = assignedFrom;
-        
+
             document.getElementById("To").focus();
-            document.getElementById("To").value = assignedTo;
-            
-            document.getElementById("Title").focus();
         }
+
     </script>
+
 </head>
 
 <body>
@@ -39,8 +38,8 @@
 
 
             <div class="input-field half-input" style="float:right;">
-                <input id="To" type="text" name="to" class="validate product">
-                <label for="To">To</label>
+                <input id="To" type="email" name="Guest Email" class="validate product">
+                <label for="To">Guest Email</label>
             </div>
 
             <br>
