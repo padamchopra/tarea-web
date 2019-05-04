@@ -65,7 +65,7 @@
                 if(user){
                     alert(firebase.auth().getUid());
                 }else{
-                    return false;
+                    alert("Authorisation failed. Try again.");
                 }
             });
         }
