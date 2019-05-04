@@ -9,6 +9,9 @@
 
     <title>Home</title>
     <link rel="stylesheet" href="style.css" />
+    <script>
+    alert(<?php echo $_GET['assignee'] ?>);
+    </script>
 </head>
 
 <body>
