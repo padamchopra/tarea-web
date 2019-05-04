@@ -106,3 +106,10 @@ input {
 .materialize-textarea{
     color: white;
 }
+#toast-container {
+    top: auto !important;
+    width: 50%;
+    left: 25%;
+    text-align: center;
+    bottom: 7%;
+}

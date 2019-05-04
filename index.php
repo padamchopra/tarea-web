@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-firestore.js"></script>
     <title>Add task</title>
     <link rel="stylesheet" href="style.css" />
@@ -40,6 +40,7 @@
                         });
                     } else {
                         alert(assignedFrom + "- user not found.");
+                        window.location.href = "http://tarea-api.herokuapp.com/";
                     }
                     db.collection("users").where("username", "==", assignedTo).get()
                         .then(function(querySnapshot2) {
@@ -48,8 +49,9 @@
                                 document.getElementById("To").value = assignedTo;
                             } else {
                                 alert(assignedTo + "- user not found.");
+                                window.location.href = "http://tarea-api.herokuapp.com/";
                             }
-                            document.getElementById("Title").focus();
+                            document.getElementById("title").focus();
                         });
                 });
         };
@@ -60,15 +62,31 @@
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                console.log(errorMessage);
+                if (errorMessage.length > 0) {
+                    M.toast({html: errorMessage, classes: 'rounded', displayLength: '2000'});
+                }
                 // ...
             });
             firebase.auth().onAuthStateChanged(function(user) {
                 var loggedin = firebase.auth().currentUser;
-                if(loggedin){
-                    alert(firebase.auth().getUid());
-                }else{
-                    alert("Authorisation failed. Try again.");
+                if (loggedin) {
+                    db.collection("tasks").add({
+                            from: assignedFrom,
+                            to: assignedTo,
+                            title: document.getElementById("title").value,
+                            description: document.getElementById("description").value,
+                            deadline_date: document.getElementById("date").value,
+                            deadline_time: document.getElementById("time").value,
+                            priority: document.querySelector('input[name=Priority]:checked').value
+                        })
+                        .then(function(docRef) {
+                            M.toast({html: "Task Added!", classes: 'rounded', displayLength: '1200'});
+                            firebase.auth().signOut();
+                        })
+                        .catch(function(error) {
+                            console.log(error);
+                            M.toast({html: "Could not add task. Try again.", classes: 'rounded', displayLength: '1200'});
+                        });
                 }
             });
         }
@@ -109,7 +127,7 @@
             <br>
 
             <div class="input-field">
-                <input id="Title" type="text" name="title" class="validate product" required>
+                <input id="title" type="text" name="title" class="validate product" required>
                 <label for="Title">Title</label>
             </div>
 
@@ -120,8 +138,8 @@
 
 
 
-            Deadline: <input type="date" name="date" style="width: 40%;margin-left: 20px;">
-            <input type="time" name="time" style="width: 40%;float: right;">
+            Deadline: <input type="date" id="date" name="date" style="width: 40%;margin-left: 20px;">
+            <input type="time" id="time" name="time" style="width: 40%;float: right;">
 
             <br>
             <br>
@@ -130,20 +148,20 @@
             Priority:
 
             <label style="width: 30%; margin-left: 30px ">
-                <input class="with-gap" name="Priority" type="radio" checked style="width: 30%; margin-left: 20px" />
+                <input class="with-gap" name="Priority" type="radio" value="casual" checked style="width: 30%; margin-left: 20px" />
                 <span>Casual</span>
             </label>
 
 
             <label style="width: 30%; margin-left: 70px">
-                <input class="with-gap" name="Priority" type="radio" />
+                <input class="with-gap" name="Priority" value="important" type="radio" />
                 <span>Important</span>
             </label>
 
 
 
             <label style="width: 30%; margin-left: 70px ">
-                <input class="with-gap" name="Priority" type="radio" style="width: 30%;" />
+                <input class="with-gap" name="Priority" value="urgent" type="radio" style="width: 30%;" />
                 <span>Urgent</span>
             </label>
 
