@@ -103,3 +103,6 @@ input {
     text-align: center;
     font-size: 80px;
 }
+.materialize-textarea{
+    color: white;
+}
