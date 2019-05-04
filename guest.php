@@ -125,7 +125,7 @@
 
 
             <div class="input-field half-input" style="float:right;">
-                <input id="To" type="email" name="Guest Email" class="validate product">
+                <input id="to" type="email" name="Guest Email" class="validate product">
                 <label for="To">Guest Email</label>
             </div>
 
