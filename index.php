@@ -8,6 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-firestore.js"></script>
     <title>Add task</title>
     <link rel="stylesheet" href="style.css" />
