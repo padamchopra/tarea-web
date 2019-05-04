@@ -7,21 +7,46 @@
     <link rel="stylesheet" href="materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+    <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-firestore.js"></script>
     <title>Add task</title>
     <link rel="stylesheet" href="style.css" />
     <script>
         var assignedFrom = "<?php echo $_GET['assignee']?>";
         var assignedTo = "<?php echo $_GET['assignedto']?>";
-        window.onload = function(){
+        window.onload = function() {
             document.getElementById("From").focus();
             document.getElementById("From").value = assignedFrom;
-        
+
             document.getElementById("To").focus();
             document.getElementById("To").value = assignedTo;
-            
+
             document.getElementById("Title").focus();
         }
+
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDEbxVcQXlE4P0FzfgLK7_hMqFDIiM2M5w",
+            authDomain: "tarea-82fee.firebaseapp.com",
+            databaseURL: "https://tarea-82fee.firebaseio.com",
+            projectId: "tarea-82fee",
+            storageBucket: "tarea-82fee.appspot.com",
+            messagingSenderId: "591529979499",
+            appId: "1:591529979499:web:9c58c129d24943a8"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+        db.collection("tasks").add({
+            something: "Random"
+        })
+        .then(function(docRef){
+            alert(docRef.id);
+        })
+        .catch(function(error){
+           console.log(error); 
+        });
+
     </script>
 </head>
 
