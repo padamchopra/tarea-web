@@ -57,13 +57,23 @@
         };
 
         function askpassword() {
-            var password = prompt("Please enter your password", "");
+            var Modalelem = document.querySelector('.modal');
+            var instanceModal = M.Modal.init(Modalelem);
+            instanceModal.open();
+        }
+        
+        function verify(){
+            var password = document.getElementById("password").value;
             firebase.auth().signInWithEmailAndPassword(emailtoverify, password).catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 if (errorMessage.length > 0) {
-                    M.toast({html: errorMessage, classes: 'rounded', displayLength: '2000'});
+                    M.toast({
+                        html: errorMessage,
+                        classes: 'rounded',
+                        displayLength: '2000'
+                    });
                 }
                 // ...
             });
@@ -80,12 +90,20 @@
                             priority: document.querySelector('input[name=Priority]:checked').value
                         })
                         .then(function(docRef) {
-                            M.toast({html: "Task Added!", classes: 'rounded', displayLength: '1200'});
+                            M.toast({
+                                html: "Task Added!",
+                                classes: 'rounded',
+                                displayLength: '1200'
+                            });
                             firebase.auth().signOut();
                         })
                         .catch(function(error) {
                             console.log(error);
-                            M.toast({html: "Could not add task. Try again.", classes: 'rounded', displayLength: '1200'});
+                            M.toast({
+                                html: "Could not add task. Try again.",
+                                classes: 'rounded',
+                                displayLength: '1200'
+                            });
                         });
                 }
             });
@@ -176,6 +194,19 @@
         </form>
 
 
+    </div>
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h6 class="productbold" style="font-size:30px;color:black;">Please enter your password: </h6>
+            <div class="input-field product">
+                <input id="password" type="password" name="password" class="validate product" style="color:black;" required>
+                <label for="password">Password</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="modal-close waves-effect waves-green btn-flat product">CLOSE</a>
+            <a href="#" class="modal-close waves-effect waves-green btn-flat product" onclick="verify()">VERIFY &amp; ADD</a>
+        </div>
     </div>
 
 

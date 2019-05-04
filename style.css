@@ -113,3 +113,8 @@ input {
     text-align: center;
     bottom: 7%;
 }
+
+.modal {
+    width: 40%;
+    margin-top: 170px;
+}
