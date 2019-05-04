@@ -14,16 +14,6 @@
     <script>
         var assignedFrom = "<?php echo $_GET['assignee']?>";
         var assignedTo = "<?php echo $_GET['assignedto']?>";
-        window.onload = function() {
-            document.getElementById("From").focus();
-            document.getElementById("From").value = assignedFrom;
-
-            document.getElementById("To").focus();
-            document.getElementById("To").value = assignedTo;
-
-            document.getElementById("Title").focus();
-        }
-
         // Your web app's Firebase configuration
         var firebaseConfig = {
             apiKey: "AIzaSyDEbxVcQXlE4P0FzfgLK7_hMqFDIiM2M5w",
@@ -37,15 +27,39 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         var db = firebase.firestore();
-        db.collection("tasks").add({
-            something: "Random"
-        })
-        .then(function(docRef){
-            alert(docRef.id);
-        })
-        .catch(function(error){
-           console.log(error); 
-        });
+
+        window.onload = function() {
+            db.collection("users").where("username", "==", assignedFrom).get()
+                .then(function(querySnapshot) {
+                    if (querySnapshot.size != 0) {
+                        document.getElementById("From").focus();
+                        document.getElementById("From").value = assignedFrom;
+                    } else {
+                        alert(assignedFrom + "- user not found.");
+                    }
+                });
+            db.collection("users").where("username", "==", assignedTo).get()
+                .then(function(querySnapshot) {
+                    if (querySnapshot.size != 0) {
+                        document.getElementById("To").focus();
+                        document.getElementById("To").value = assignedTo;
+                    } else {
+                        alert(assignedFrom + "- user not found.");
+                    }
+                })
+
+            document.getElementById("Title").focus();
+        }
+
+        /*db.collection("tasks").add({
+                something: "Random"
+            })
+            .then(function(docRef) {
+                alert(docRef.id);
+            })
+            .catch(function(error) {
+                console.log(error);
+            }); */
 
     </script>
 </head>
