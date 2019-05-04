@@ -62,7 +62,11 @@
                 // ...
             });
             firebase.auth().onAuthStateChanged(function(user) {
-                alert(firebase.auth().getUid());
+                if(user){
+                    alert(firebase.auth().getUid());
+                }else{
+                    return false;
+                }
             });
         }
 
