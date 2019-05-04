@@ -10,7 +10,12 @@
     <title>Home</title>
     <link rel="stylesheet" href="style.css" />
     <script>
-    alert(<?php echo $_GET['assignee'] ?>);
+        var location = window.location.href;
+        var assignedFrom = location.split("=")[1].split("&")[0];
+        document.getElementById('From').value = assignedFrom;
+        var assignedTo = location.split("=")[2];
+        document.getElementById('To').value = assignedTo;
+        
     </script>
 </head>
 
