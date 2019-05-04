@@ -37,6 +37,7 @@
                         document.getElementById("From").value = assignedFrom;
                         querySnapshot.forEach(function(doc) {
                             emailtoverify = doc.email;
+                            alert(emailtoverify);
                         });
                     } else {
                         alert(assignedFrom + "- user not found.");
