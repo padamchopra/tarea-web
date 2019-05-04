@@ -144,7 +144,7 @@
             <br>
             <input class="formbutton cancelbutton productbold" type="reset" style="float: left; margin-left: 20px; color: #ff3030; border-color: #ff3030;" value="Cancel">
 
-            <input class="formbutton productbold" type="submit" value="Assign Task" onsubmit="askpassword()" style="float: right;margin-right: 20px; background-color: #4caf50;border-color: black;">
+            <input class="formbutton productbold" type="submit" value="Assign Task" onclick="askpassword()" style="float: right;margin-right: 20px; background-color: #4caf50;border-color: black;">
 
 
 
