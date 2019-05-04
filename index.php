@@ -36,7 +36,7 @@
                         document.getElementById("From").focus();
                         document.getElementById("From").value = assignedFrom;
                         querySnapshot.forEach(function(doc) {
-                            console.log(doc);
+                            emailtoverify = doc.data().email;
                         });
                     } else {
                         alert(assignedFrom + "- user not found.");
