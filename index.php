@@ -19,13 +19,13 @@
         <form method="POST" action="/addnewtask">
 
             <div class="input-field half-input" style="float:left;">
-                <input id="From" type="text" name="from" class="validate product">
+                <input id="From" type="text" name="from" class="validate product" value="<?php echo $_GET['assignee'] ?>">
                 <label for="From">From</label>
             </div>
 
 
             <div class="input-field half-input" style="float:right;">
-                <input id="To" type="text" name="to" class="validate product">
+                <input id="To" type="text" name="to" class="validate product" value="<?php echo $_GET['assignedto'] ?>">
                 <label for="To">To</label>
             </div>
 
