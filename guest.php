@@ -83,6 +83,7 @@
                             deadline_date: document.getElementById("date").value,
                             deadline_time: document.getElementById("time").value,
                             priority: document.querySelector('input[name=Priority]:checked').value,
+                        status: 'notdone',
                             pin: pin
                         })
                         .then(function(docRef) {

@@ -94,7 +94,8 @@
                             description: document.getElementById("description").value,
                             deadline_date: document.getElementById("date").value,
                             deadline_time: document.getElementById("time").value,
-                            priority: document.querySelector('input[name=Priority]:checked').value
+                            priority: document.querySelector('input[name=Priority]:checked').value,
+                            status: 'notdone',
                         })
                         .then(function(docRef) {
                             taskId = docRef.id;
