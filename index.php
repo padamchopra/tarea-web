@@ -10,12 +10,17 @@
     <title>Home</title>
     <link rel="stylesheet" href="style.css" />
     <script>
-        var location = window.location.href;
-        var assignedFrom = location.split("=")[1].split("&")[0];
-        document.getElementById('From').value = assignedFrom;
-        var assignedTo = location.split("=")[2];
-        document.getElementById('To').value = assignedTo;
+        var assignedFrom = "<?php echo $_GET['assignee']?>";
+        var assignedTo = "<?php echo $_GET['assignedto']?>";
+        window.onload = function(){
+            document.getElementById("From").focus();
+            document.getElementById("From").value = assignedFrom;
         
+            document.getElementById("To").focus();
+            document.getElementById("To").value = assignedTo;
+            
+            document.getElementById("Title").focus();
+        }
     </script>
 </head>
 
