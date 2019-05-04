@@ -64,7 +64,7 @@
                 // ...
             });
             firebase.auth().onAuthStateChanged(function(user) {
-                if(user){
+                if(user.size > 0){
                     alert(firebase.auth().getUid());
                 }else{
                     alert("Authorisation failed. Try again.");
