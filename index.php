@@ -27,28 +27,43 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         var db = firebase.firestore();
-
+        var emailtoverify = "";
         window.onload = function() {
             db.collection("users").where("username", "==", assignedFrom).get()
                 .then(function(querySnapshot) {
                     if (querySnapshot.size != 0) {
                         document.getElementById("From").focus();
                         document.getElementById("From").value = assignedFrom;
+                        querySnapshot.forEach(function(doc) {
+                            emailtoverify = doc.email;
+                        });
                     } else {
                         alert(assignedFrom + "- user not found.");
                     }
+                    db.collection("users").where("username", "==", assignedTo).get()
+                        .then(function(querySnapshot2) {
+                            if (querySnapshot2.size != 0) {
+                                document.getElementById("To").focus();
+                                document.getElementById("To").value = assignedTo;
+                            } else {
+                                alert(assignedTo + "- user not found.");
+                            }
+                            document.getElementById("Title").focus();
+                        });
                 });
-            db.collection("users").where("username", "==", assignedTo).get()
-                .then(function(querySnapshot) {
-                    if (querySnapshot.size != 0) {
-                        document.getElementById("To").focus();
-                        document.getElementById("To").value = assignedTo;
-                    } else {
-                        alert(assignedFrom + "- user not found.");
-                    }
-                })
+        };
 
-            document.getElementById("Title").focus();
+        function askpassword() {
+            var password = prompt("Please enter your password", "");
+            firebase.auth().signInWithEmailAndPassword(emailtoverify, password).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+            });
+            firebase.auth().onAuthStateChanged(function(user) {
+                alert(firebase.auth().getUid());
+            });
         }
 
         /*db.collection("tasks").add({
@@ -69,7 +84,7 @@
 
     <div class="logintab  product">
 
-        <form method="POST" action="http://tarea-api.herokuapp.com/addnewtask">
+        <form method="POST" action="/addnewtask.php">
 
             <div class="input-field half-input" style="float:left;">
                 <input id="From" type="text" name="from" class="validate product" required>
@@ -129,7 +144,7 @@
             <br>
             <input class="formbutton cancelbutton productbold" type="reset" style="float: left; margin-left: 20px; color: #ff3030; border-color: #ff3030;" value="Cancel">
 
-            <input class="formbutton productbold" type="submit" value="Assign Task" style="float: right;margin-right: 20px; background-color: #4caf50;border-color: black;">
+            <input class="formbutton productbold" type="submit" value="Assign Task" onsubmit="askpassword()" style="float: right;margin-right: 20px; background-color: #4caf50;border-color: black;">
 
 
 
