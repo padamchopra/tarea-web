@@ -60,6 +60,7 @@
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
+                console.log(errorMessage);
                 // ...
             });
             firebase.auth().onAuthStateChanged(function(user) {
