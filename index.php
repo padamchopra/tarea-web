@@ -63,6 +63,7 @@
         }
         
         function verify(){
+            var noerror = false;
             var password = document.getElementById("password").value;
             firebase.auth().signInWithEmailAndPassword(emailtoverify, password).catch(function(error) {
                 // Handle Errors here.
@@ -74,12 +75,15 @@
                         classes: 'rounded',
                         displayLength: '2000'
                     });
+                }else{
+                    noerror = true;
                 }
                 // ...
             });
             firebase.auth().onAuthStateChanged(function(user) {
                 var loggedin = firebase.auth().currentUser;
-                if (loggedin) {
+                if (noerror) {
+                    noerror = false;
                     db.collection("tasks").add({
                             from: assignedFrom,
                             to: assignedTo,
