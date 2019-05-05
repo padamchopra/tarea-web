@@ -185,7 +185,7 @@
         </div>
         <div class="modal-footer">
             <a href="#" class="modal-close waves-effect waves-green btn-flat product">CLOSE</a>
-            <a href="#" class="modal-close waves-effect waves-green btn-flat product" onclick="verify()">VERIFY &amp; ADD</a>
+            <a href="#" class="modal-close waves-effect waves-green btn-flat product" onclick="verify()">VERIFY &amp; VIEW</a>
         </div>
     </div>
 
